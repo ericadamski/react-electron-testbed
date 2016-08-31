@@ -38,3 +38,8 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
+
+.hidden {
+  visibility: hidden;
+  display: none;
+}

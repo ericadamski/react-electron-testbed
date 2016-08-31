@@ -1,0 +1,52 @@
+@import '../../utils/default'; //********************************************************//
+$color: #ffffff;
+$size: 50px;
+$speed: 0.75s;
+$thickness: 8px; // Odd numbers created a "wobble" effect.
+// Animation Keyframes
+//********************************************************//
+@mixin rotate-forever {
+  0% {
+    @include transform(rotate(0deg));
+  }
+
+  100% {
+    @include transform(rotate(360deg));
+  }
+}
+@-webkit-keyframes rotate-forever {
+   @include rotate-forever;
+}
+@-moz-keyframes rotate-forever {
+   @include rotate-forever;
+}
+@keyframes rotate-forever {
+   @include rotate-forever;
+}
+// The Loading Spinner
+//********************************************************//
+
+.loading-spinner {
+  @include animation-duration($speed);
+  @include animation-iteration-count(infinite);
+  @include animation-name(rotate-forever);
+  @include animation-timing-function(linear);
+  @include size($size);
+  border            : $thickness solid $color;
+  border-right-color: transparent;
+  border-radius     : 50%;
+  display           : inline-block;
+}
+
+.loading-container {
+  @include position(fixed, 0 0 0 0);
+  width     : 100%;
+  height    : 100%;
+  background: rgba($pale-blue, 0.99);
+  z-index   : $top-level - 1;
+
+  .loading-spinner {
+    @include position(absolute, 50% 0 0 50%);
+    margin: -$size/2 0 0 -$size/2;
+  }
+}

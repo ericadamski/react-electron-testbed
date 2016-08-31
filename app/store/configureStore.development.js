@@ -6,8 +6,10 @@ import { routerMiddleware, push } from 'react-router-redux';
 import rootReducer from '../reducers';
 
 import * as photoActions from '../actions/photo/photo.creators';
+import * as loadingScreenActions from '../actions/loading-screen/loading-screen.creators';
 
 const actionCreators = {
+  ...loadingScreenActions,
   ...photoActions,
   push,
 };

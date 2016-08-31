@@ -1,6 +1,9 @@
 import Request from '../../api/request';
 import * as TYPES from './photo.types';
 import { dispatch } from 'redux';
+import { hideLoadingScreen } from '../loading-screen/loading-screen.creators';
+
+var _request;
 
 export function requestPhoto() {
   return {
@@ -25,12 +28,10 @@ export function requestPhotoFail(resp) {
 
 export function doRequest() {
   return (dispatch) => {
-    const r = new Request('get-photo');
-
+    if (!_request) _request = new Request('get-photo');
     dispatch(requestPhoto());
-
-    r.send().subscribe(resp => {
-      console.log(`resp ${resp}`);
+    _request.send().subscribe(resp => {
+      dispatch(hideLoadingScreen());
       (resp.error) ?
         dispatch(requestPhotoFail(resp)) :
         dispatch(requestPhotoSuccess(resp));

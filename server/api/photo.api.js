@@ -15,12 +15,10 @@ export class PhotoRoute extends Route {
   }
 
   _getPhoto(event, args) {
-    needle.get(this._path, (err, response) => {
-      console.log(response);
+    needle.get(this._path, (err, response) =>
       event.sender.send(this._route,
         (err) ?
           this.response(false, err) :
-          this.response(true, response.body.toString('base64')));
-        });
+          this.response(true, response.body.toString('base64'))));
   }
 }

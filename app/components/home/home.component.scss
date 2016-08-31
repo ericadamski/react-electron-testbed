@@ -1,0 +1,31 @@
+@import '../../utils/default';
+
+.container {
+  @include position(relative);
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(flex-start);
+  @include flex-direction(column);
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+
+  &:after {
+    @include position(absolute);
+    content: '';
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(black, 0.4);
+    z-index: -1;
+  }
+
+  .menu_inner {
+    padding: 25px;
+    width: calc(100% - 25px);
+    height: 100vh;
+  }
+}

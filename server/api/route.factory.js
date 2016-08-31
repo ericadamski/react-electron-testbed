@@ -1,11 +1,11 @@
 import { ipcMain } from 'electron';
 
 export class RouteFactory {
-  constructor(prefix = '') {
+  static setPrefix (prefix = '') {
     this.prefix = prefix;
   }
 
   static generate(route, then) {
-    return () => ipcMain.on(`${this.prefix}${route}`, then)
+    return () => ipcMain.on(`${this.prefix || ''}${route}`, then);
   }
 }

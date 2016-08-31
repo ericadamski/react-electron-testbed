@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import styles from './home.component.css';
 
-
 export default class Home extends Component {
-
   render() {
-    console.log(this);
+    var data;
+    console.log(this.props);
+    if (this.props.image.response)
+      data = this.props.image.response.data;
     return (
-      <div>
-        <div className={styles.container}>
+      <div onClick={this.props.updateImage()} className={styles.container} style={{
+        background: `url('data:image;base64,${data || ''}') center center no-repeat`,
+        backgroundSize: 'cover'
+      }}>
+        <div className={styles['menu_inner']}>
           <h2>Home</h2>
-          <p> { this.props.fetching } </p>
         </div>
       </div>
     );

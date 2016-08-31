@@ -8,13 +8,15 @@ export default class Request {
 
   send(data = { empty: true }) {
     ipcRenderer.send(this._route, data);
-    return this._receive();
+    this._receive();
+    return this.notifier;
   }
 
   _receive() {
     this.notifier = new Observable(observer => {
-      ipcRenderer.on(this._route, (event, arg) => {
-        observer.next(arg);
+      ipcRenderer.on(this._route, (event, args) => {
+        observer.next(args);
+        observer.complete();
       });
     });
   }

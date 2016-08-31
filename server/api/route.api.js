@@ -12,6 +12,7 @@ export class Route {
   }
 
   response(status, data) {
+    console.log(status, data);
     return {
       success: status,
       data: data

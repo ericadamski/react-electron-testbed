@@ -27,11 +27,11 @@ export function doRequest() {
   return (dispatch) => {
     const r = new Request('get-photo');
 
-    dispatch(requestPhoto);
+    dispatch(requestPhoto());
 
     r.send().subscribe(resp => {
-      const response = resp.json();
-      (response.err) ?
+      console.log(`resp ${resp}`);
+      (resp.error) ?
         dispatch(requestPhotoFail(resp)) :
         dispatch(requestPhotoSuccess(resp));
     });

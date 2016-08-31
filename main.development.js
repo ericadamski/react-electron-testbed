@@ -1,6 +1,8 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
+// import { ipcMain } from 'electron';
+import { PhotoRoute }from './server/index';
 
-import { Photo }from './server/index';
+console.log(PhotoRoute);
 
 let menu;
 let template;
@@ -36,12 +38,16 @@ const installExtensions = async () => {
 
 var Api = [];
 
+Api.push(new PhotoRoute());
+
+Api.map(a => a.init());
+
 app.on('ready', async () => {
   await installExtensions();
 
-  Api.push(new Photo());
-
-  Api.map(a => a.init());
+  // ipcMain.once('get-photo', (event, arg) => {
+  //   event.sender.send('get-photo', JSON.stringify({ alive: true }));
+  // });
 
   mainWindow = new BrowserWindow({
     show: false,

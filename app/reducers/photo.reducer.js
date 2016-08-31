@@ -3,6 +3,7 @@ import * as TYPES from '../actions/photo/photo.types';
 export default function photo(state = {}, action) {
   switch (action.type) {
     case TYPES.REQUEST_PHOTO:
+      console.log(action);
       return Object.assign({}, state, {
         isFetching: action.isFetching,
       });
@@ -16,5 +17,5 @@ export default function photo(state = {}, action) {
       });
     default:
       return state;
-  }
+  };
 }

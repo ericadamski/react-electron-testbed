@@ -1,23 +1,30 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Home from '../components/home/home.component';
-import { requestPhoto } from '../actions/photo/photo.creators';
+import { doRequest } from '../actions/photo/photo.creators';
 
 class HomePage extends Component {
-  render() {
+
+  componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(requestPhoto());
-    const { isFetching, response } = this.props;
+    dispatch(doRequest());
+  }
+
+  render() {
+    const { photo, dispatch } = this.props;
     return (
-      <Home response={response} fetching={isFetching} />
+      <Home image={photo} updateImage={() => dispatch(doRequest())} />
     );
   }
 }
 
 HomePage.propTypes = {
-  isFetching: PropTypes.bool,
-  response: PropTypes.object,
+  photo: PropTypes.object,
   dispatch: PropTypes.func.isRequired
 };
 
-export default connect(state => state)(Home);
+function mapStateToProps(state) {
+  return state;
+}
+
+export default connect(mapStateToProps)(HomePage);

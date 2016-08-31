@@ -5,7 +5,7 @@ export default class LoadingScreen extends Component {
   render() {
     return (
       <div className={styles['loading-container'] + ' ' +
-        ((this.props.show) ? '' : 'hidden')}>
+        ((this.props.show) ? '' : styles.hide)}>
         <div className={styles['loading-spinner']} />
       </div>
     );

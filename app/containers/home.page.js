@@ -11,7 +11,7 @@ class HomePage extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(doRequest());
+    dispatch(doRequest(() => dispatch(hideLoadingScreen())));
     dispatch(showLoadingScreen());
   }
 

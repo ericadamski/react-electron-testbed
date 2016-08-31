@@ -26,15 +26,15 @@ export function requestPhotoFail(resp) {
   };
 }
 
-export function doRequest() {
+export function doRequest(callback = () => console.log('not implemented')) {
   return (dispatch) => {
     if (!_request) _request = new Request('get-photo');
     dispatch(requestPhoto());
     _request.send().subscribe(resp => {
-      dispatch(hideLoadingScreen());
       (resp.error) ?
         dispatch(requestPhotoFail(resp)) :
         dispatch(requestPhotoSuccess(resp));
+      callback();
     });
   };
 }
